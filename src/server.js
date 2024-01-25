@@ -8,9 +8,11 @@ const port = 3333;
 
 const server = http.createServer(async (req, res) => {
 
-  await json(req, res);
+  if (req.url !== '/tasks/upload') {
+    await json(req, res);
+  }
 
-    const route = routes.find((route) => {
+  const route = routes.find((route) => {
     return route.method === method && route.path.test(url);
   });
 

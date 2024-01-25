@@ -9,5 +9,9 @@
   },
   "keywords": [],
   "author": "wesley_freit",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "csv-parse": "^5.5.3",
+    "multer": "1.4.5-lts.1"
+  }
 }

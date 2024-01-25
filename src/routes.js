@@ -1,5 +1,6 @@
 import { randomUUID } from 'node:crypto';
 import { Database } from './db/database.js';
+import { multipart } from './middlewares/multipart-form-data.js';
 import { buildRoutePath } from './utils/build-route-path.js';
 
 const database = new Database();
@@ -90,5 +91,18 @@ export const routes = [
 
       return res.writeHead(204).end();
     },
-  }
+  },
+  {
+    method: 'POST',
+    path: buildRoutePath('/tasks/upload'),
+    handler: async (req, res) => {
+      multipart.single('file')(req, res, async (err) => {
+        if (err) return res.writeHead(400).end('Error with file');
+
+        if (!req.file) return res.writeHead(400).end('No such file');
+
+        return res.writeHead(201).end('File registred');
+      });
+    },
+  },
 ];
