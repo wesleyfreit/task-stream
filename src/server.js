@@ -1,9 +1,12 @@
 import http from 'node:http';
+import { json } from './middlewares/application-json';
 
 const port = 3333;
 
 const server = http.createServer(async (req, res) => {
-  res.writeHead(200, { 'Content-Type': 'text/plain' });
+
+  await json(req, res);
+
   res.end('Hello World\n');
 });
 
